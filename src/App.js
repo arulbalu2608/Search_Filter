@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import sample from "./sample.json";
+import "./App.css";
 
 function App() {
+  const [search, setsearch] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        placeholder="Search...."
+        value={search}
+        onChange={(e) => setsearch(e.target.value)}
+      />
+      <br />
+
+      <br />
+      {sample
+        .filter((val) => {
+          if (search === "") {
+            return val;
+          } else if (
+            val.first_name.toLowerCase().includes(search.toLowerCase())
+          ) {
+            return val;
+          }
+        })
+        .map(({ id, first_name }) => {
+          return <p key={id}>{first_name}</p>;
+        })}
     </div>
   );
 }
