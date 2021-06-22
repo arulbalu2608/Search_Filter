@@ -3,6 +3,7 @@ import sample from "./sample.json";
 import "./App.css";
 
 function App() {
+  const localAray = sample;
   const [search, setsearch] = useState("");
 
   return (
@@ -15,7 +16,7 @@ function App() {
       <br />
 
       <br />
-      {sample
+      {localAray
         .filter((val) => {
           if (search === "") {
             return val;
